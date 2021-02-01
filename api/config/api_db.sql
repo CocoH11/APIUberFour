@@ -37,4 +37,9 @@ CREATE TABLE IF NOT EXISTS `orders_lines` (
 INSERT INTO `dishes` (`idDish`, `name`, `price`, `calories`, `proteins`, `carbs`) VALUES
 (1, 'Lasagne', 45, 336, 3, 5),
 (2, 'Pizza', 6, 290, 47, 30),
-(3, 'Merguez Nutella', 30, 4500, 2, 90)
+(3, 'Merguez Nutella', 30, 4500, 2, 90);
+
+INSERT INTO `clients` (`idClient`, `firstName`, `lastName`, `email`, `dateOfBirth`) VALUES
+(1, 'jean', 'jean', 'jean@jeanmail.com', '12-12-12'),
+(2, 'jack', 'sparrow', 'jackSpa@blackPearl.com', '11-11-11'),
+(3, 'dori', 'jaioublier', 'dori@gsaisplus.com', '06-06-06');
