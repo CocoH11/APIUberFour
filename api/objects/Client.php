@@ -11,13 +11,16 @@ class Client
     private $lastName;
     private $email;
     private $dateOfBirth;
+    private $imageURL;
+    private $extraNapKins;
+    private $frequentRefill;
 
     public function __construct($db){
         $this->conn = $db;
     }
 
     public function readOne(){
-        $query = "SELECT `idClient`, `firstName`, `lastName`, `email`, `dateOfBirth` FROM " . $this->table_name . " WHERE `idClient` = " . $this->idClient;
+        $query = "SELECT `idClient`, `firstName`, `lastName`, `email`, `dateOfBirth`, `imageURL`, `extraNapkins`,  `frequentRefill` FROM " . $this->table_name . " WHERE `idClient` = " . $this->idClient;
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
         return $stmt;

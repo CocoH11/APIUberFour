@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS `orders_lines`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `clients`;
+DROP TABLE IF EXISTS `dishes`;
+
 CREATE TABLE IF NOT EXISTS `dishes` (
     `idDish` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
@@ -14,6 +19,9 @@ CREATE TABLE IF NOT EXISTS `clients` (
     `lastName` VARCHAR(50) NOT NULL,
     `email` VARCHAR(50) NOT NULL,
     `dateOfBirth` DATE NOT NULL,
+    `imageURL` VARCHAR(100) NOT NULL,
+    `extraNapkins` BOOLEAN NOT NULL,
+    `frequentRefill` BOOLEAN NOT NULL,
     PRIMARY KEY (`idClient`)
 ) ENGINE=INNODB CHARSET=utf8 ;
 
@@ -39,7 +47,7 @@ INSERT INTO `dishes` (`idDish`, `name`, `price`, `calories`, `proteins`, `carbs`
 (2, 'Pizza', 6, 290, 47, 30),
 (3, 'Merguez Nutella', 30, 4500, 2, 90);
 
-INSERT INTO `clients` (`idClient`, `firstName`, `lastName`, `email`, `dateOfBirth`) VALUES
-(1, 'jean', 'jean', 'jean@jeanmail.com', '12-12-12'),
-(2, 'jack', 'sparrow', 'jackSpa@blackPearl.com', '11-11-11'),
-(3, 'dori', 'jaioublier', 'dori@gsaisplus.com', '06-06-06');
+INSERT INTO `clients` (`idClient`, `firstName`, `lastName`, `email`, `dateOfBirth`, `imageURL`, `extraNapkins`, `frequentRefill`) VALUES
+(1, 'jean', 'jean', 'jean@jeanmail.com', '12-12-12', 'no image', TRUE, TRUE),
+(2, 'jack', 'sparrow', 'jackSpa@blackPearl.com', '11-11-11', 'http://localhost:8080/files/pictures/jack_sparrow.jpg', TRUE, FALSE),
+(3, 'dori', 'jaioublier', 'dori@gsaisplus.com', '06-06-06', 'http://localhost:8080/files/pictures/dori_jaioublier.jpg', FALSE, FALSE);

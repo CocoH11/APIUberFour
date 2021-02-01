@@ -25,6 +25,9 @@ if (isset($_GET['id'])){
                 "lastName" => $row["lastName"],
                 "email" => $row["email"],
                 "dateOfBirth" => $row["dateOfBirth"],
+                "imageURL" => $row["imageURL"],
+                "extraNapkins" => $row["extraNapkins"],
+                "frequentRefill" => $row["frequentRefill"]
             );
             array_push($clients_arr["records"], $client_item);
         }
