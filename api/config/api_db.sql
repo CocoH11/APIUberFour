@@ -33,3 +33,8 @@ CREATE TABLE IF NOT EXISTS `orders_lines` (
     CONSTRAINT `fk_orders_line_orders` FOREIGN KEY (`idOrder`) REFERENCES `orders`(`idOrder`),
     CONSTRAINT `fk_orders_line_dishes` FOREIGN KEY (`idDish`) REFERENCES `dishes`(`idDish`)
 ) ENGINE=INNODB CHARSET=utf8;
+
+INSERT INTO `dishes` (`idDish`, `name`, `price`, `calories`, `proteins`, `carbs`) VALUES
+(1, 'Lasagne', 45, 336, 3, 5),
+(2, 'Pizza', 6, 290, 47, 30),
+(3, 'Merguez Nutella', 30, 4500, 2, 90)
