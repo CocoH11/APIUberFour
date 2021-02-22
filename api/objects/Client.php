@@ -26,6 +26,32 @@ class Client
         return $stmt;
     }
 
+    function create(){
+        // query to insert record
+        $query = "INSERT INTO " . $this->table_name . " SET `firstName` =:firstName, `lastName` =:lastName, `email` =:email, `imageURL` =:imageURL, `extraNapkins` =:extraNapkins, `frequentRefill` =:frequentRefill";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+        $this->firstName=htmlspecialchars(strip_tags($this->firstName));
+        $this->lastName=htmlspecialchars(strip_tags($this->lastName));
+        $this->email=htmlspecialchars(strip_tags($this->email));
+        $this->imageURL=htmlspecialchars(strip_tags($this->imageURL));
+        $this->extraNapKins=htmlspecialchars(strip_tags($this->extraNapKins));
+        $this->frequentRefill = htmlspecialchars(strip_tags($this->frequentRefill));
+        // bind values
+        $stmt->bindParam(":firstName", $this->firstName);
+        $stmt->bindParam(":lastName", $this->lastName);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":imageURL", $this->imageURL);
+        $stmt->bindParam(":extraNapkins", 1);
+        $stmt->bindParam(":frequentRefill", 0);
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return mixed
      */
@@ -105,6 +131,57 @@ class Client
     {
         $this->dateOfBirth = $dateOfBirth;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImageURL()
+    {
+        return $this->imageURL;
+    }
+
+    /**
+     * @param mixed $imageURL
+     */
+    public function setImageURL($imageURL)
+    {
+        $this->imageURL = $imageURL;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExtraNapKins()
+    {
+        return $this->extraNapKins;
+    }
+
+    /**
+     * @param mixed $extraNapKins
+     */
+    public function setExtraNapKins($extraNapKins)
+    {
+        $this->extraNapKins = $extraNapKins;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFrequentRefill()
+    {
+        return $this->frequentRefill;
+    }
+
+    /**
+     * @param mixed $frequentRefill
+     */
+    public function setFrequentRefill($frequentRefill)
+    {
+        $this->frequentRefill = $frequentRefill;
+    }
+
+
+
 
 
 }

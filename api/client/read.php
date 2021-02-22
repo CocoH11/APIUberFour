@@ -17,7 +17,6 @@ if (isset($_GET['id'])){
     $num = $stmt->rowCount();
     if ($num > 0) {
         $clients_arr = array();
-        $clients_arr["records"] = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $client_item = array(
                 "idClient" => $row["idClient"],
@@ -26,10 +25,14 @@ if (isset($_GET['id'])){
                 "email" => $row["email"],
                 "dateOfBirth" => $row["dateOfBirth"],
                 "imageURL" => $row["imageURL"],
-                "extraNapkins" => $row["extraNapkins"],
-                "frequentRefill" => $row["frequentRefill"]
             );
-            array_push($clients_arr["records"], $client_item);
+            if ($row["extraNapkins"] == 1)$client_item["extraNapkins"]=true;
+            else $client_item["extraNapkins"]=false;
+
+            if ($row["frequentRefill"] == 1)$client_item["frequentRefill"]=true;
+            else $client_item["frequentRefill"]=false;
+
+            array_push($clients_arr, $client_item);
         }
         http_response_code(200);
         echo json_encode($clients_arr);

@@ -9,12 +9,14 @@ $database = new Database();
 $db = $database->getConnection();
 
 $dish = new Dish($db);
+if (isset($_GET['id'])){
+    $stmt = $dish->readOne($_GET['id']);
+    $num = $stmt->rowCount();
 
-$stmt = $dish->readAll();
-$num = $stmt->rowCount();
-if ($num > 0) {
-    $dishes_arr = array();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    if ($num != 1){
+        $dishes_array = array();
+        $row = $stmt->fecth(PDO::FETCH_ASSOC);
+
         $dish_item = array(
             "id" => $row["idDish"],
             "name" => $row["name"],
@@ -25,13 +27,21 @@ if ($num > 0) {
             "carbs" => $row["carbs"],
             "imageURL" => $row["imageURL"]
         );
-        array_push($dishes_arr, $dish_item);
+        array_push($dishes_array, $dish_item);
+
+        http_response_code(200);
+        echo json_encode($dishes_array);
+    } else {
+        http_response_code(404);
+
+        echo json_encode(
+            array("message"=>"No products found")
+        );
     }
-    http_response_code(200);
-    echo json_encode($dishes_arr);
 } else {
     http_response_code(404);
+
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No products found")
     );
 }
